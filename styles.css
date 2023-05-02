@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -14,23 +16,24 @@
 
 body {
     color: var(--main-black);
+    font-family: 'Lato', sans-serif;
 }
 
-header {
+.navbar {
     width: 100vw;
     height: 60px;
     position: sticky;
     top: 0;
     left: 0;
-    background: linear-gradient(to left, var(--main-black) 51.75%, var(--main-color)52%);
+    background: linear-gradient(to left, var(--main-black) 50%, var(--main-color)50%);
     display: flex;
 }
 
-.header-center {
+.navbar-center {
     width: 100%;
     max-width: 1325px;
     margin: 0 auto;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;  
@@ -40,13 +43,17 @@ header {
     letter-spacing: 0.2rem;
     color: var(--main-black);
     user-select: none;
+    display: flex;
+    margin-left:35px;
 }
 
 .logo span {
-    color: var(--main-color)
+    color: var(--main-color);
+    padding-left: 30px;
+    font-size: 2rem;
 }
 
-.header-icon {
+.navbar-icon {
     font-size: 1.5rem;
 }
 
@@ -64,4 +71,39 @@ header {
     padding: 0 0.25rem;
     border-radius: 30%;
     color: var(--main-black)
+}
+
+.hero {
+    background: url('./images/hero-image.jpg') center/cover no-repeat;
+    height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner {
+    background-color: rgba(255,255,255, 0.7);
+    padding: 2rem 3rem;
+    margin: 0rem 2rem;
+    font-size: 1.6rem;
+    border-radius: 3px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.banner-btn {
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    border: none;
+    background: var(--main-color);
+    opacity: 1.0;
+    border-radius: 3px;
+    transition: var(--main-transition);
+}
+
+.banner-btn:hover {
+    background: var(--main-black);
+    color: var(--main-color)
 }
