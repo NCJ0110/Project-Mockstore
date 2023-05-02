@@ -3,4 +3,3 @@ const client = contentful.createClient({
     accessToken: '5rR0l33aoKMxUkSBV-VUrTbwb2QY1P-kQSUwepEKHAA'
 })
 
-console.log(client);
