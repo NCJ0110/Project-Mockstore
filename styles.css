@@ -19,6 +19,8 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+/*START OF NAVBAR */
+
 .navbar {
     width: 100vw;
     height: 60px;
@@ -27,6 +29,7 @@ body {
     left: 0;
     background: linear-gradient(to left, var(--main-black) 50%, var(--main-color)50%);
     display: flex;
+    z-index: 1;
 }
 
 .navbar-center {
@@ -73,6 +76,9 @@ body {
     color: var(--main-black)
 }
 
+/*END OF NAVBAR */
+
+/*START OF HERO */
 .hero {
     background: url('./images/hero-image.jpg') center/cover no-repeat;
     height: calc(100vh - 60px);
@@ -101,9 +107,88 @@ body {
     opacity: 1.0;
     border-radius: 3px;
     transition: var(--main-transition);
+    cursor: pointer;
 }
 
 .banner-btn:hover {
     background: var(--main-black);
     color: var(--main-color)
 }
+
+/*END OF HERO */
+
+/*START OF PRODUCTS */
+
+.products {
+    margin: 4rem 0;
+}
+
+.products h1 {
+    text-align: center;
+    padding-bottom: 2rem;
+    font-size: 3rem;
+    text-transform: capitalize;
+}
+
+.products-center {
+    width: 90vw;
+    max-width: 1150px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem 2rem;
+}
+
+.img-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.img-container:hover .product-img {
+    opacity: 0.7;
+}
+
+.img-container:hover .add-cart-btn {
+    transform: translateX(0);
+}
+
+.product-img {
+    width: 100%;
+    min-height: 12rem;
+    display: block;
+    transition: var(--main-transition);
+}
+
+.add-cart-btn {
+    position: absolute;
+    top: 70%;
+    right: 0;
+    padding: 0.5rem 1rem;
+    background: var(--main-color);
+    border: none;
+    text-transform: uppercase;
+    transform: translateX(101%);
+    transition: var(--main-transition);
+    cursor: pointer;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.add-cart-btn:hover {
+    color: var(--main-color);
+    background: var(--main-black);
+}
+
+.add-cart-btn i {
+    padding-right: 1rem;
+}
+
+.product-title {
+    text-align: center;
+}
+
+.product-price {
+    text-align: center;
+}
+
+/*END OF PRODUCTS */
