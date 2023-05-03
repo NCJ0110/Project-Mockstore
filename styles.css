@@ -185,10 +185,16 @@ body {
 
 .product-title {
     text-align: center;
+    text-transform: capitalize;
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.5rem;
 }
 
 .product-price {
     text-align: center;
+    text-transform: capitalize;
+    font-size: 1.3rem;
+    color: var(--main-color)
 }
 
 /*END OF PRODUCTS */
