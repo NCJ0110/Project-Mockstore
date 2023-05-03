@@ -74,10 +74,15 @@ class UI {
 
                 const cartItem = {...Storage.getProduct(id), amount: 1};
                 cart = [...cart, cartItem];
-                console.log(cart);
+                Storage.saveCart(cart);
             })
         })
 
+    }
+
+    setupAPP(){
+        console.log("test");
+        cart = Storage.getCart();
     }
 }
 
@@ -90,11 +95,21 @@ class Storage {
         const products = JSON.parse(localStorage.getItem('products'));
         return products.find(product => product.id === id);
     }
+
+    static saveCart(cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    static getCart(){
+        return localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     const products = new Products();
     const ui = new UI(); 
+
+    ui.setupAPP();
     
     products.getProducts().then(products => {
         ui.displayProducts(products);
