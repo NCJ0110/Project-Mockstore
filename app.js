@@ -12,6 +12,7 @@ const cartDOM = document.querySelector('.cart');
 const cartContent = document.querySelector('.cart-content');
 const cartBtn = document.querySelector('.cart-btn');
 const closeCartBtn = document.querySelector('.close-cart');
+const clearCartBtn = document.querySelector('.clear-cart');
 
 let cart = [];
 let DOMbuttons = [];
@@ -65,7 +66,8 @@ class UI {
 
     getCartButtons(){
         const buttons = [...document.querySelectorAll('.add-cart-btn')];
-        
+        DOMbuttons = buttons;
+
         buttons.forEach(button => {
             const id = button.dataset.id;
             const inCart = cart.find(product => product.id === id);
@@ -132,6 +134,36 @@ class UI {
         })
     }
 
+    cartLogic(){
+        clearCartBtn.addEventListener('click', () => {
+            this.clearCart()
+        })
+    }
+
+    clearCart(){
+        const productsId = cart.map(item => item.id);
+        productsId.forEach(id => this.removeProduct(id));
+
+        while(cartContent.children.length > 0){
+            cartContent.removeChild(cartContent.children[0]);
+        }
+
+        this.closeCart();
+    }
+
+    removeProduct(id){
+        cart = cart.filter(item => item.id !== id);
+        Storage.saveCart(cart);
+        this.setCartValues(cart);
+        const button = this.getSingleButton(id);
+        button.innerHTML = `<i class="fa fa-shopping-cart" data-id="${id}"></i> add to cart`;
+        button.disabled = false;
+    }
+
+    getSingleButton(id){
+        return DOMbuttons.find(button => button.dataset.id === id);
+    }
+
     openCart(){
         cartOverlay.classList.add('cart-overlay-visible');
         cartDOM.classList.add('show-cart');
@@ -181,5 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
         Storage.saveProducts(products);
     }).then(() => {
         ui.getCartButtons();
+        ui.cartLogic();
     })
 })
