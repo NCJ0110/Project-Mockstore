@@ -72,6 +72,9 @@ class UI {
                 button.innerText = 'In Cart';
                 button.disabled = true;
 
+                const cartItem = {...Storage.getProduct(id), amount: 1};
+                cart = [...cart, cartItem];
+                console.log(cart);
             })
         })
 
@@ -83,7 +86,10 @@ class Storage {
         localStorage.setItem('products', JSON.stringify(products));
     }
 
-   
+    static getProduct(id){
+        const products = JSON.parse(localStorage.getItem('products'));
+        return products.find(product => product.id === id);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
