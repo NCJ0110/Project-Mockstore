@@ -9,6 +9,7 @@ const cartAmount = document.querySelector('.cart-amount');
 const cartTotal = document.querySelector('.total-amount');
 const cartOverlay = document.querySelector('.cart-overlay');
 const cartDOM = document.querySelector('.cart');
+const cartContent = document.querySelector('.cart-content');
 
 let cart = [];
 let DOMbuttons = [];
@@ -52,7 +53,7 @@ class UI {
                         add to cart</button>
                 </div>
                 <h3 class="product-title">${product.title}</h3>
-                <h4 class="product-price">${product.price}</h4>
+                <h4 class="product-price">£${product.price}</h4>
             </article>
             `
         })
@@ -80,7 +81,9 @@ class UI {
                 cart = [...cart, cartItem];
                 Storage.saveCart(cart);
                 this.setCartValues(cart);
+                this.addCartItem(cartItem);
                 this.openCart();
+                
             })
         })
 
@@ -98,6 +101,27 @@ class UI {
         cartAmount.innerHTML = totalItems;
         cartTotal.innerText = parseFloat(totalPrice.toFixed(2));
 
+    }
+
+    addCartItem(item){
+        const div = document.createElement('div');
+        div.classList.add('cart-item');
+
+        div.innerHTML = `
+            <img src="${item.image}" alt="product">
+            <div class="cart-item-info">
+                <h3>${item.title}</h3>
+                <h4>£${item.price}</h4>
+                <span class="remove-item" id="${item.id}">remove</span>
+            </div>
+            <div >
+                <i class="fa fa-chevron-up" data-id="${item.id}"></i>
+                <p>${item.amount}</p>
+                <i class="fa fa-chevron-down" data-id="${item.id}"></i>
+            </div>
+        `
+
+        cartContent.appendChild(div);
     }
 
     openCart(){
