@@ -7,6 +7,8 @@ const client = contentful.createClient({
 const productsCenter = document.querySelector('.products-center');
 const cartAmount = document.querySelector('.cart-amount');
 const cartTotal = document.querySelector('.total-amount');
+const cartOverlay = document.querySelector('.cart-overlay');
+const cartDOM = document.querySelector('.cart');
 
 let cart = [];
 let DOMbuttons = [];
@@ -78,6 +80,7 @@ class UI {
                 cart = [...cart, cartItem];
                 Storage.saveCart(cart);
                 this.setCartValues(cart);
+                this.openCart();
             })
         })
 
@@ -95,6 +98,11 @@ class UI {
         cartAmount.innerHTML = totalItems;
         cartTotal.innerText = parseFloat(totalPrice.toFixed(2));
 
+    }
+
+    openCart(){
+        cartOverlay.classList.add('cart-overlay-visible');
+        cartDOM.classList.add('show-cart');
     }
 
     setupAPP(){
