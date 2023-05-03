@@ -10,6 +10,8 @@ const cartTotal = document.querySelector('.total-amount');
 const cartOverlay = document.querySelector('.cart-overlay');
 const cartDOM = document.querySelector('.cart');
 const cartContent = document.querySelector('.cart-content');
+const cartBtn = document.querySelector('.cart-btn');
+const closeCartBtn = document.querySelector('.close-cart');
 
 let cart = [];
 let DOMbuttons = [];
@@ -112,7 +114,7 @@ class UI {
             <div class="cart-item-info">
                 <h3>${item.title}</h3>
                 <h4>£${item.price}</h4>
-                <span class="remove-item" id="${item.id}">remove</span>
+                <span class="remove-item" id="${item.id}"><p>remove</p></span>
             </div>
             <div >
                 <i class="fa fa-chevron-up" data-id="${item.id}"></i>
@@ -124,14 +126,28 @@ class UI {
         cartContent.appendChild(div);
     }
 
+    populateCart(cart){
+        cart.forEach(item => {
+            this.addCartItem(item);
+        })
+    }
+
     openCart(){
         cartOverlay.classList.add('cart-overlay-visible');
         cartDOM.classList.add('show-cart');
     }
 
+    closeCart(){
+        cartOverlay.classList.remove('cart-overlay-visible');
+        cartDOM.classList.remove('show-cart');
+    }
+
     setupAPP(){
         cart = Storage.getCart();
         this.setCartValues(cart);
+        this.populateCart(cart)
+        cartBtn.addEventListener('click', this.openCart);
+        closeCartBtn.addEventListener('click', this.closeCart);
     }
 }
 
