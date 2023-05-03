@@ -6,9 +6,13 @@ const client = contentful.createClient({
 //variables
 const productsCenter = document.querySelector('.products-center');
 
+let cart = [];
+let DOMbuttons = [];
+
 class Products{
     async getProducts(){
-        const result = await client.getEntries({
+        try {
+            const result = await client.getEntries({
             content_type: 'mockStore'
         })
 
@@ -23,6 +27,10 @@ class Products{
         })
 
         return products;
+        } catch(error){
+            console.log(error);
+        }
+        
     }
 }
 
@@ -48,6 +56,34 @@ class UI {
         productsCenter.innerHTML = productsHTML;
     }
 
+    getCartButtons(){
+        const buttons = [...document.querySelectorAll('.add-cart-btn')];
+        
+        buttons.forEach(button => {
+            const id = button.dataset.id;
+            const inCart = cart.find(product => product.id === id);
+
+            if(inCart){
+                button.innerText = 'In Cart';
+                button.disabled = true;
+            }
+
+            button.addEventListener('click', (e) => {
+                button.innerText = 'In Cart';
+                button.disabled = true;
+
+            })
+        })
+
+    }
+}
+
+class Storage {
+    static saveProducts(products){
+        localStorage.setItem('products', JSON.stringify(products));
+    }
+
+   
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -56,5 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     products.getProducts().then(products => {
         ui.displayProducts(products);
-    });
+        Storage.saveProducts(products);
+    }).then(() => {
+        ui.getCartButtons();
+    })
 })
