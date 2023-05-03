@@ -5,6 +5,8 @@ const client = contentful.createClient({
 
 //variables
 const productsCenter = document.querySelector('.products-center');
+const cartAmount = document.querySelector('.cart-amount');
+const cartTotal = document.querySelector('.total-amount');
 
 let cart = [];
 let DOMbuttons = [];
@@ -75,14 +77,29 @@ class UI {
                 const cartItem = {...Storage.getProduct(id), amount: 1};
                 cart = [...cart, cartItem];
                 Storage.saveCart(cart);
+                this.setCartValues(cart);
             })
         })
 
     }
 
+    setCartValues(cart) {
+        let totalItems = 0;
+        let totalPrice = 0;
+
+        cart.forEach(item => {
+            totalItems += item.amount;
+            totalPrice += item.amount * item.price;
+        })
+
+        cartAmount.innerHTML = totalItems;
+        cartTotal.innerText = parseFloat(totalPrice.toFixed(2));
+
+    }
+
     setupAPP(){
-        console.log("test");
         cart = Storage.getCart();
+        this.setCartValues(cart);
     }
 }
 
