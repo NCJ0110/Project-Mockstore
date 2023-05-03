@@ -209,6 +209,7 @@ body {
     left: 0;
     background: rgba(0,0,0,0.5);
     z-index:2;
+    visibility: hidden;
 }
 
 .cart{
@@ -221,7 +222,15 @@ body {
     color: var(--main-color);
     padding: 0.5rem 1rem;
     transition: var(--main-transition);
-    
+    transform: translateX(101%);
+}
+
+.show-cart {
+    transform:translateX(0);
+}
+
+.cart-overlay-visible{
+    visibility: visible;
 }
 
 .cart h2 {
