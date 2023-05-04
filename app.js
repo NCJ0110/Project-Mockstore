@@ -210,7 +210,6 @@ class UI {
         this.populateCart(cart)
         cartBtn.addEventListener('click', this.openCart);
         closeCartBtn.addEventListener('click', this.closeCart);
-        this.openCart();
     }
 }
 

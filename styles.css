@@ -21,6 +21,11 @@ body {
     user-select: none;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 /*START OF NAVBAR */
 
 .navbar {
