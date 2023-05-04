@@ -197,13 +197,15 @@ a {
     text-transform: capitalize;
     margin: 1rem 0 0.5rem 0;
     font-size: 1.5rem;
+    letter-spacing: var(--main-spacing);
 }
 
 .product-price {
     text-align: center;
     text-transform: capitalize;
     font-size: 1.3rem;
-    color: var(--main-color)
+    color: var(--main-black);
+    letter-spacing: var(--main-spacing);
 }
 
 /*END OF PRODUCTS */
@@ -256,8 +258,9 @@ a {
     }
 }
 
-.close-cart {
-    font-size: 1.5rem;
+.close-cart i{
+    font-size: 2rem;
+    margin-top: 5px;
     cursor: pointer;
 }
 .cart-content {
