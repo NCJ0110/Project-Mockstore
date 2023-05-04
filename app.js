@@ -116,11 +116,11 @@ class UI {
             <div class="cart-item-info">
                 <h3>${item.title}</h3>
                 <h4>£${item.price}</h4>
-                <span class="remove-item" id="${item.id}"><p>remove</p></span>
+                <span class="remove-item" id="${item.id}">remove</span>
             </div>
             <div >
                 <i class="fa fa-chevron-up" data-id="${item.id}"></i>
-                <p>${item.amount}</p>
+                <p class="product-amount">${item.amount}</p>
                 <i class="fa fa-chevron-down" data-id="${item.id}"></i>
             </div>
         `
@@ -137,6 +137,36 @@ class UI {
     cartLogic(){
         clearCartBtn.addEventListener('click', () => {
             this.clearCart()
+        })
+
+        cartContent.addEventListener('click', (e) => {
+            if(e.target.classList.contains('remove-item')){
+                const id = e.target.id;
+                this.removeProduct(id);
+                cartContent.removeChild(e.target.parentElement.parentElement);
+            } else if(e.target.classList.contains('fa-chevron-up')){
+                const id = e.target.dataset.id;
+                const currentElement = e.target;
+                const cartItem = cart.find(item => item.id === id);
+                cartItem.amount++;
+                Storage.saveCart(cart);
+                currentElement.nextElementSibling.innerText = cartItem.amount;
+                this.setCartValues(cart);
+            } else if(e.target.classList.contains('fa-chevron-down')){
+                const id = e.target.dataset.id;
+                const currentElement = e.target;
+                const cartItem = cart.find(item => item.id === id);
+                cartItem.amount--;
+                if(cartItem.amount > 0){
+                    currentElement.previousElementSibling.innerText = cartItem.amount;
+                   Storage.saveCart(cart);
+                    this.setCartValues(cart);
+                } else {
+                    this.removeProduct(id);
+                    cartContent.removeChild(currentElement.parentElement.parentElement);
+                }
+                
+            }
         })
     }
 
@@ -180,6 +210,7 @@ class UI {
         this.populateCart(cart)
         cartBtn.addEventListener('click', this.openCart);
         closeCartBtn.addEventListener('click', this.closeCart);
+        this.openCart();
     }
 }
 
